@@ -20,6 +20,19 @@ export default new Router({
       name: "dashboard",
       component: Dashboard,
       beforeEnter: authGuard
+    },
+    {
+      path: "/dashboard/keeps",
+      name: "Dashboard keeps",
+      component: Dashboard,
+      beforeEnter: authGuard
+    },
+    {
+      path: "/dashboard/vaults",
+      name: "Dashboard vaults",
+      component: Dashboard,
+      beforeEnter: authGuard
     }
+
   ]
 });

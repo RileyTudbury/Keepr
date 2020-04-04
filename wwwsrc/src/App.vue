@@ -11,9 +11,9 @@ import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "App",
   async beforeCreate() {
+    this.$store.dispatch("getPublicKeeps");
     await onAuth();
     this.$store.dispatch("setBearer", this.$auth.bearer);
-    this.$store.dispatch("getPublicKeeps");
   },
   components: {
     Navbar
