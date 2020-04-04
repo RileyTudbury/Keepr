@@ -42,5 +42,22 @@ namespace Keepr.Repositories
       KeepData.Id = _db.ExecuteScalar<int>(sql, KeepData);
       return KeepData;
     }
+
+    internal Keep Edit(Keep updatedKeep)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+          name = @Name,
+          description = @Description,
+          img = @Img,
+          isPrivate = @IsPrivate
+      WHERE id = @Id
+      ";
+      _db.Execute(sql, updatedKeep);
+      return updatedKeep;
+    }
+
+
   }
 }

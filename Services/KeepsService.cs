@@ -32,5 +32,20 @@ namespace Keepr.Services
     {
       return _repo.Create(newKeep);
     }
+
+    internal Keep Edit(Keep updatedKeep)
+    {
+      Keep found = Get(updatedKeep.Id);
+      if (found.UserId != updatedKeep.UserId)
+      {
+        throw new Exception("Invalid Request");
+      }
+      found.Name = updatedKeep.Name;
+      found.Description = updatedKeep.Description;
+      found.Img = updatedKeep.Img;
+      found.IsPrivate = updatedKeep.IsPrivate;
+      return _repo.Edit(found);
+    }
+
   }
 }
