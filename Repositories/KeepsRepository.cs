@@ -58,6 +58,11 @@ namespace Keepr.Repositories
       return updatedKeep;
     }
 
-
+    internal bool Delete(int Id)
+    {
+      string sql = "DELETE FROM keeps WHERE id = @Id LIMIT 1";
+      int removed = _db.Execute(sql, new { Id });
+      return removed == 1;
+    }
   }
 }

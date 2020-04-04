@@ -91,5 +91,20 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpDelete("{id}")]
+    [Authorize]
+    public ActionResult<Keep> Delete(int id)
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_ks.Delete(id, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
   }
 }
