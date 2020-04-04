@@ -19,13 +19,22 @@ export default new Vuex.Store({
   state: {
     publicKeeps: []
   },
-  mutations: {},
+  mutations: {
+    setPublicKeeps(state, keeps) {
+      state.publicKeeps = keeps;
+    }
+  },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
+    },
+
+    async getPublicKeeps({ commit }) {
+      let res = await api.get("keeps");
+      commit("setPublicKeeps", res.data);
     }
   }
 });
