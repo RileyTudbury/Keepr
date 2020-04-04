@@ -23,13 +23,13 @@ namespace Keepr.Repositories
     }
 
     //Get One Keep
-
     internal Keep Get(int id)
     {
       string sql = "SELECT * FROM keeps WHERE id = @Id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { Id = id });
     }
 
+    //Create Keep
     internal Keep Create(Keep KeepData)
     {
       string sql = @"
