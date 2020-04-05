@@ -91,6 +91,7 @@ namespace Keepr.Controllers
       }
     }
 
+    // Edit Keep
     [HttpPut("{id}")]
     [Authorize]
     public ActionResult<Keep> Edit(int id, [FromBody] Keep updatedKeep)
@@ -108,6 +109,7 @@ namespace Keepr.Controllers
       }
     }
 
+    // Delete Keep
     [HttpDelete("{id}")]
     [Authorize]
     public ActionResult<Keep> Delete(int id)

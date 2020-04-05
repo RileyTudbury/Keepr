@@ -46,28 +46,46 @@
                     <div class="form-group">
                       <label for="nameInput">Keep Name</label>
                       <input
+                        v-model="newKeep.name"
                         type="text"
                         class="form-control"
                         id="nameInput"
                         placeholder="Enter Keep Name.."
+                        required
                       />
                     </div>
                     <div class="form-group">
                       <label for="descInput">Keep Description</label>
                       <input
+                        v-model="newKeep.description"
                         type="text"
                         class="form-control"
                         id="descInput"
                         placeholder="Description.."
+                        required
                       />
                     </div>
                     <div class="form-group">
                       <label for="imgInput">Keep Img Url</label>
-                      <input type="text" class="form-control" id="imgInput" placeholder="Img URL.." />
+                      <input
+                        value="http://placehold.it/150"
+                        v-model="newKeep.img"
+                        type="text"
+                        class="form-control"
+                        id="imgInput"
+                        placeholder="Img URL.."
+                        required
+                      />
                     </div>
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="privateCheck" />
-                      <label class="form-check-label" for="privateCheck">Keep this private?</label>
+                      <label class="form-check-label" for="privateCheck">
+                        <input
+                          @click="newKeep.isPrivate = !newKeep.isPrivate"
+                          type="checkbox"
+                          class="form-check-input"
+                          id="privateCheck"
+                        />Keep this private?
+                      </label>
                     </div>
                     <small>Private Keeps will not be displayed on the homepage</small>
                     <div class="modal-footer">
@@ -103,11 +121,27 @@ export default {
     this.$store.dispatch("setBearer", this.$auth.bearer);
     this.$store.dispatch("getUserKeeps");
   },
+  data() {
+    return {
+      newKeep: {
+        name: "",
+        description: "",
+        img: "http://placehold.it/150",
+        isPrivate: false
+      }
+    };
+  },
   mounted() {},
   methods: {
     //TODO Make createKeep do something
     createKeep() {
-      console.log("Submitted!");
+      this.$store.dispatch("createKeep", this.newKeep);
+      this.newKeep = {
+        name: "",
+        description: "",
+        img: "http://placehold.it/150",
+        isPrivate: false
+      };
     }
   },
   computed: {

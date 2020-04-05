@@ -26,6 +26,12 @@ export default new Vuex.Store({
     },
     SetUserKeeps(state, userKeeps) {
       state.userKeeps = userKeeps;
+    },
+    addKeep(state, keep) {
+      state.userKeeps.push(keep)
+      if (!keep.isPrivate) {
+        state.publicKeeps.push(keep)
+      }
     }
   },
   actions: {
@@ -43,6 +49,10 @@ export default new Vuex.Store({
     async getUserKeeps({ commit }) {
       let res = await api.get("keeps/mykeeps");
       commit("SetUserKeeps", res.data);
+    },
+    async createKeep({ commit }, keepData) {
+      let res = await api.post("keeps", keepData)
+      commit("addKeep", res.data)
     }
 
   }
