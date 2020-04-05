@@ -14,6 +14,7 @@ export default {
     this.$store.dispatch("getPublicKeeps");
     await onAuth();
     this.$store.dispatch("setBearer", this.$auth.bearer);
+    this.$store.dispatch("getUserKeeps");
   },
   components: {
     Navbar
