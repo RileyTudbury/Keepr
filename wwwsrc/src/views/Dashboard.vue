@@ -133,7 +133,6 @@ export default {
   },
   mounted() {},
   methods: {
-    //TODO Make createKeep do something
     createKeep() {
       this.$store.dispatch("createKeep", this.newKeep);
       this.newKeep = {
