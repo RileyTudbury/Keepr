@@ -11,7 +11,7 @@
           Views: {{keepData.views}}
         </span>
         <div v-if="(keepData.userId == this.$auth.userInfo.sub) && keepData.isPrivate">
-          <button class="btn btn-sm btn-danger mt-1">Delete Keep</button>
+          <button @click="deleteKeep" class="btn btn-sm btn-danger mt-1">Delete Keep</button>
         </div>
       </div>
     </div>
@@ -22,7 +22,13 @@
 export default {
   name: "Keep",
   props: ["keepData", "index"],
-  mounted() {}
+  mounted() {},
+  methods: {
+    //TODO Make deleteKeep do something
+    deleteKeep() {
+      console.log("Deleted! NOT!");
+    }
+  }
 };
 </script>
 
