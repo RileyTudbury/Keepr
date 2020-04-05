@@ -11,7 +11,7 @@
           Views: {{keepData.views}}
         </span>
         <div v-if="(keepData.userId == this.$auth.userInfo.sub) && keepData.isPrivate">
-          <button @click="deleteKeep" class="btn btn-sm btn-danger mt-1">Delete Keep</button>
+          <button @click="deleteKeep(keepData.id)" class="btn btn-sm btn-danger mt-1">Delete Keep</button>
         </div>
       </div>
     </div>
@@ -25,8 +25,8 @@ export default {
   mounted() {},
   methods: {
     //TODO Make deleteKeep do something
-    deleteKeep() {
-      console.log("Deleted! NOT!");
+    deleteKeep(keepId) {
+      this.$store.dispatch("deleteKeep", keepId);
     }
   }
 };

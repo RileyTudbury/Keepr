@@ -32,6 +32,10 @@ export default new Vuex.Store({
       if (!keep.isPrivate) {
         state.publicKeeps.push(keep)
       }
+    },
+    removeKeep(state, keepId) {
+      state.publicKeeps = state.publicKeeps.filter(k => k.id != keepId);
+      state.userKeeps = state.userKeeps.filter(k => k.id != keepId);
     }
   },
   actions: {
@@ -53,6 +57,10 @@ export default new Vuex.Store({
     async createKeep({ commit }, keepData) {
       let res = await api.post("keeps", keepData)
       commit("addKeep", res.data)
+    },
+    async deleteKeep({ commit }, keepId) {
+      let res = await api.delete(`keeps/${keepId}`)
+      commit("removeKeep", keepId)
     }
 
   }
