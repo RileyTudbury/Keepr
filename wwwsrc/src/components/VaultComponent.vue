@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Name: {{activeVault.name}}</h1>
+    <div class="col-12 text-center mt-2">
+      <h1>{{activeVault.name}}</h1>
+      <h3>{{activeVault.description}}</h3>
+    </div>
   </div>
 </template>
 
