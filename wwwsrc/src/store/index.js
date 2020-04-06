@@ -78,7 +78,7 @@ export default new Vuex.Store({
 
     //Vault Actions
     async getUserVaults({ commit }) {
-      let res = await api.get("vaults/myvaults");
+      let res = await api.get("vaults");
       commit("setUserVaults", res.data)
     },
     async createVault({ commit }, vaultData) {

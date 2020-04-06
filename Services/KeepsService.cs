@@ -66,5 +66,10 @@ namespace Keepr.Services
       }
       throw new Exception("How did you hit this error?");
     }
+
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
+    {
+      return _repo.GetKeepsByVaultId(vaultId, userId);
+    }
   }
 }

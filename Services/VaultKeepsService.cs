@@ -11,9 +11,23 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    internal object Create(VaultKeep newVaultKeep)
+    internal VaultKeep Create(VaultKeep newVaultKeep)
     {
       return _repo.Create(newVaultKeep);
+    }
+
+    internal VaultKeep Delete(int id, string userId)
+    {
+      VaultKeep found = _repo.Get(id);
+      if (found.UserId != userId)
+      {
+        throw new UnauthorizedAccessException("Invalid Request");
+      }
+      if (_repo.Delete(id))
+      {
+        return found;
+      }
+      throw new Exception("Something went terribly wrong!");
     }
   }
 }
