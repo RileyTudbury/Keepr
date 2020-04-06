@@ -183,7 +183,7 @@
 <script>
 import { onAuth } from "@bcwdev/auth0-vue";
 import Keep from "../components/KeepComponent";
-import Vault from "../components/VaultComponent";
+import Vault from "../views/VaultView.vue";
 export default {
   name: "dashboard",
   async beforeCreate() {

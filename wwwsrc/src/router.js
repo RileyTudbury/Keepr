@@ -5,7 +5,7 @@ import Home from "./views/Home.vue";
 // @ts-ignore
 import Dashboard from "./views/Dashboard.vue";
 // @ts-ignore
-import Vault from "./components/VaultComponent.vue";
+import Vault from "./views/VaultView.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
