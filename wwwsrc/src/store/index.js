@@ -100,7 +100,6 @@ export default new Vuex.Store({
 
     //VaultKeep Actions
     async createVaultKeep({ commit }, vaultKeep) {
-      debugger
       let res = await api.post("vaultkeeps", vaultKeep)
       commit("addVaultKeep", res.data)
     }
