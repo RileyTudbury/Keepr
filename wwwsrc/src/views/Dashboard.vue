@@ -160,18 +160,14 @@
             </div>
           </div>
         </div>
-        <!-- <keep
-          v-for="(keep, key, index) in userKeeps"
-          :key="keep.id"
-          :index="index"
-          :keepData="keep"
-        />-->
-        <div class="col-3" v-for="vault in userVaults" :key="vault.id">
+        <div class="col-3" v-for="vault in userVaults" :key="vault.id" :vaultData="vault">
           <div class="card">
-            <img
-              class="card-img-top"
-              src="https://www.gleason-group.net/wp-content/uploads/2018/03/vault-1.jpg"
-            />
+            <router-link :to="{name: 'vault view', params: {vaultId: vault.id}}">
+              <img
+                class="card-img-top"
+                src="https://www.gleason-group.net/wp-content/uploads/2018/03/vault-1.jpg"
+              />
+            </router-link>
             <div class="card-body">
               <p class="card-text">{{vault.name}}</p>
               <p class="card-text">{{vault.description}}</p>
@@ -187,6 +183,7 @@
 <script>
 import { onAuth } from "@bcwdev/auth0-vue";
 import Keep from "../components/KeepComponent";
+import Vault from "../components/VaultComponent";
 export default {
   name: "dashboard",
   async beforeCreate() {
