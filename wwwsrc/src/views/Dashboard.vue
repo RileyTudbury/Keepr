@@ -106,7 +106,81 @@
         />
       </div>
     </div>
-    <div v-else-if="$route.name == 'Dashboard vaults'">VAULTS GO HERE</div>
+    <div class="container-fluid" v-else-if="$route.name == 'Dashboard vaults'">
+      <div class="row">
+        <div class="col-12">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            data-toggle="modal"
+            data-target="#vault-form"
+            class="btn btn-block btn-info mb-2"
+          >Create New Vault</button>
+          <!-- Modal -->
+          <div class="modal fade" id="vault-form" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Create a new Vault</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form @submit.prevent="createVault">
+                    <div class="form-group">
+                      <label for="vaultNameInput">Vault Name</label>
+                      <input
+                        v-model="newVault.name"
+                        type="text"
+                        class="form-control"
+                        id="vaultNameInput"
+                        placeholder="Enter Vault Name.."
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="vaultDescInput">Vault Description</label>
+                      <input
+                        v-model="newVault.description"
+                        type="text"
+                        class="form-control"
+                        id="vaultDescInput"
+                        placeholder="Description.."
+                        required
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Vault Em!</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <keep
+          v-for="(keep, key, index) in userKeeps"
+          :key="keep.id"
+          :index="index"
+          :keepData="keep"
+        />-->
+        <div class="col-3" v-for="vault in userVaults" :key="vault.id">
+          <div class="card">
+            <img
+              class="card-img-top"
+              src="https://www.gleason-group.net/wp-content/uploads/2018/03/vault-1.jpg"
+            />
+            <div class="card-body">
+              <p class="card-text">{{vault.name}}</p>
+              <p class="card-text">{{vault.description}}</p>
+              <button @click="deleteVault(vault.id)" class="btn btn-sm btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -120,6 +194,7 @@ export default {
     await onAuth();
     this.$store.dispatch("setBearer", this.$auth.bearer);
     this.$store.dispatch("getUserKeeps");
+    this.$store.dispatch("getUserVaults");
   },
   data() {
     return {
@@ -128,6 +203,10 @@ export default {
         description: "",
         img: "http://placehold.it/150",
         isPrivate: false
+      },
+      newVault: {
+        name: "",
+        description: ""
       }
     };
   },
@@ -141,6 +220,17 @@ export default {
         img: "http://placehold.it/150",
         isPrivate: false
       };
+    },
+    createVault() {
+      this.$store.dispatch("createVault", this.newVault);
+      this.newVault = {
+        name: "",
+        description: ""
+      };
+      console.log(this.$store.state.userVaults);
+    },
+    deleteVault(vaultId) {
+      this.$store.dispatch("deleteVault", vaultId);
     }
   },
   computed: {
@@ -149,6 +239,9 @@ export default {
     },
     userKeeps() {
       return this.$store.state.userKeeps;
+    },
+    userVaults() {
+      return this.$store.state.userVaults;
     }
   },
   components: {

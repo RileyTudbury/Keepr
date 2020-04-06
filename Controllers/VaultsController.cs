@@ -18,19 +18,6 @@ namespace Keepr.Controllers
       _vs = vs;
     }
 
-    //Get Public Vaults
-    [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get()
-    {
-      try
-      {
-        return Ok(_vs.Get());
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      };
-    }
 
     //Get User Vaults
     [HttpGet("myVaults")]

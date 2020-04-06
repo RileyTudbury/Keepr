@@ -18,13 +18,15 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     publicKeeps: [],
-    userKeeps: []
+    userKeeps: [],
+    userVaults: []
   },
   mutations: {
+    //Keep Mutations
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps;
     },
-    SetUserKeeps(state, userKeeps) {
+    setUserKeeps(state, userKeeps) {
       state.userKeeps = userKeeps;
     },
     addKeep(state, keep) {
@@ -36,6 +38,16 @@ export default new Vuex.Store({
     removeKeep(state, keepId) {
       state.publicKeeps = state.publicKeeps.filter(k => k.id != keepId);
       state.userKeeps = state.userKeeps.filter(k => k.id != keepId);
+    },
+    //Vault Mutations
+    setUserVaults(state, userVaults) {
+      state.userVaults = userVaults
+    },
+    addVault(state, vault) {
+      state.userVaults.push(vault)
+    },
+    removeVault(state, vaultId) {
+      state.userVaults = state.userVaults.filter(v => v.id != vaultId)
     }
   },
   actions: {
@@ -46,13 +58,14 @@ export default new Vuex.Store({
       api.defaults.headers.authorization = "";
     },
 
+    //Keep Actions
     async getPublicKeeps({ commit }) {
       let res = await api.get("keeps");
       commit("setPublicKeeps", res.data);
     },
     async getUserKeeps({ commit }) {
       let res = await api.get("keeps/mykeeps");
-      commit("SetUserKeeps", res.data);
+      commit("setUserKeeps", res.data);
     },
     async createKeep({ commit }, keepData) {
       let res = await api.post("keeps", keepData)
@@ -61,6 +74,20 @@ export default new Vuex.Store({
     async deleteKeep({ commit }, keepId) {
       let res = await api.delete(`keeps/${keepId}`)
       commit("removeKeep", keepId)
+    },
+
+    //Vault Actions
+    async getUserVaults({ commit }) {
+      let res = await api.get("vaults/myvaults");
+      commit("setUserVaults", res.data)
+    },
+    async createVault({ commit }, vaultData) {
+      let res = await api.post("vaults", vaultData)
+      commit("addVault", res.data)
+    },
+    async deleteVault({ commit }, vaultId) {
+      let res = await api.delete(`vaults/${vaultId}`)
+      commit("removeVault", vaultId)
     }
 
   }
