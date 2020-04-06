@@ -17,12 +17,9 @@ namespace Keepr.Controllers
     {
       _vs = vs;
     }
-
-
     //Get User Vaults
-    [HttpGet("myVaults")]
+    [HttpGet]
     [Authorize]
-
     public ActionResult<IEnumerable<Vault>> GetUserVaults()
     {
       try
@@ -38,18 +35,18 @@ namespace Keepr.Controllers
 
     //Get One Vault
     [HttpGet("{id}")]
-    [Authorize]
     public ActionResult<Vault> Get(int id)
     {
       try
       {
-        Vault Vault = _vs.Get(id);
+        Vault vault = _vs.Get(id);
         var user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        if (user != null && user.Value == Vault.UserId)
+        if (user != null && user.Value == vault.UserId)
         {
-          return Ok(Vault);
+          return Ok(vault);
         }
-        return Unauthorized("You do not have access to this Vault.");
+        return Ok(vault);
+        // return Unauthorized("You do not have access to this Vault.");
       }
       catch (Exception e)
       {
@@ -60,7 +57,7 @@ namespace Keepr.Controllers
     // Create Vault
     [HttpPost]
     [Authorize]
-    public ActionResult<Vault> Post([FromBody] Vault newVault)
+    public ActionResult<Vault> Create([FromBody] Vault newVault)
     {
       try
       {
@@ -73,6 +70,7 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+
     // Delete Vault
     [HttpDelete("{id}")]
     [Authorize]

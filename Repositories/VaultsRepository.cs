@@ -40,7 +40,7 @@ namespace Keepr.Repositories
     internal Vault Create(Vault vaultData)
     {
       string sql = @"
-            INSERT INTO Vaults
+            INSERT INTO vaults
             (userId, name, description)
             VALUES
             (@UserId, @Name, @Description);

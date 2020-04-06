@@ -1,6 +1,7 @@
 <template>
   <div class="col-12 col-md-3 pb-2">
     <div class="card">
+      <p class="card-header">Keep it:</p>
       <img :src="keepData.img" class="card-img-top" />
       <p class="card-header">{{keepData.name}}</p>
       <div class="card-body">
