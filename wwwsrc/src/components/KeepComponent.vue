@@ -54,6 +54,8 @@ export default {
     createVaultKeep(keepId) {
       this.newVaultKeep.keepId = keepId;
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
+      debugger;
+      this.$store.dispatch("updateKeepCount", keepData.id);
     }
   }
 };

@@ -47,8 +47,7 @@ namespace Keepr.Controllers
         {
           return Ok(vault);
         }
-        return Ok(vault);
-        // return Unauthorized("You do not have access to this Vault.");
+        return Unauthorized("You do not have access to this Vault.");
       }
       catch (Exception e)
       {

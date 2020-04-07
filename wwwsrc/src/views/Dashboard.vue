@@ -68,7 +68,7 @@
                     <div class="form-group">
                       <label for="imgInput">Keep Img Url</label>
                       <input
-                        value="http://placehold.it/150"
+                        value="null"
                         v-model="newKeep.img"
                         type="text"
                         class="form-control"
@@ -198,7 +198,7 @@ export default {
       newKeep: {
         name: "",
         description: "",
-        img: "http://placehold.it/150",
+        img: null,
         isPrivate: false
       },
       newVault: {
@@ -214,7 +214,8 @@ export default {
       this.newKeep = {
         name: "",
         description: "",
-        img: "http://placehold.it/150",
+        img:
+          "https://bonitaselfdefense.com/wp-content/uploads/2017/04/default-image.jpg",
         isPrivate: false
       };
     },
