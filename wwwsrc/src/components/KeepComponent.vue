@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 col-md-3 pb-2">
     <div class="card">
-      <div v-if="this.$route.name != 'vault view'" class="card-header">
+      <div v-if="canKeep" class="card-header">
         <form @submit.prevent="createVaultKeep(keepData.id)" class="form-inline" action>
           <div class="form-group">
             <label>Keep it:</label>
@@ -32,7 +32,7 @@
 <script>
 export default {
   name: "Keep",
-  props: ["keepData", "index"],
+  props: ["canKeep", "keepData", "index"],
   data() {
     return {
       newVaultKeep: {
@@ -54,8 +54,7 @@ export default {
     createVaultKeep(keepId) {
       this.newVaultKeep.keepId = keepId;
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
-      debugger;
-      this.$store.dispatch("updateKeepCount", keepData.id);
+      this.$store.dispatch("updateKeepCount", keepId);
     }
   }
 };

@@ -6,9 +6,10 @@
       <div class="row">
         <keep
           v-for="(keep, key, index) in vaultKeeps"
-          :key="keep.id"
+          :key="keep.vaultKeepId"
           :index="index"
           :keepData="keep"
+          :canKeep="false"
         />
       </div>
     </div>

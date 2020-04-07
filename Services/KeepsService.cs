@@ -50,6 +50,7 @@ namespace Keepr.Services
       found.Description = updatedKeep.Description;
       found.Img = updatedKeep.Img;
       found.IsPrivate = updatedKeep.IsPrivate;
+
       return _repo.Edit(found);
     }
 

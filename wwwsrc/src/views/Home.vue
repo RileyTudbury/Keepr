@@ -6,8 +6,11 @@
           <h1>Welcome To Keepr</h1>
         </div>
       </div>
-      <div class="row">
-        <keep v-for="(keep, key, index) in keeps" :key="keep.id" :index="index" :keepData="keep" />
+      <div v-if="this.$auth.isAuthenticated" class="row">
+        <keep v-for="keep in keeps" :key="keep.id" :keepData="keep" :canKeep="true" />
+      </div>
+      <div v-else class="row">
+        <keep v-for="keep in keeps" :key="keep.id" :keepData="keep" :canKeep="false" />
       </div>
     </div>
   </div>
@@ -15,8 +18,12 @@
 
 <script>
 import Keep from "../components/KeepComponent";
+import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "home",
+  data() {
+    return {};
+  },
   components: {
     Keep
   },

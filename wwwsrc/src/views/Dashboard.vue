@@ -74,7 +74,6 @@
                         class="form-control"
                         id="imgInput"
                         placeholder="Img URL.."
-                        required
                       />
                     </div>
                     <div class="form-check">
@@ -103,6 +102,7 @@
           :key="keep.id"
           :index="index"
           :keepData="keep"
+          :canKeep="true"
         />
       </div>
     </div>
@@ -211,11 +211,14 @@ export default {
   methods: {
     createKeep() {
       this.$store.dispatch("createKeep", this.newKeep);
+      if (!this.newKeep.img) {
+        this.newKeep.img =
+          "https://bonitaselfdefense.com/wp-content/uploads/2017/04/default-image.jpg";
+      }
       this.newKeep = {
         name: "",
         description: "",
-        img:
-          "https://bonitaselfdefense.com/wp-content/uploads/2017/04/default-image.jpg",
+        img: null,
         isPrivate: false
       };
     },
