@@ -54,6 +54,16 @@ namespace Keepr.Services
       return _repo.Edit(found);
     }
 
+    internal Keep EditKeepCounts(Keep updatedKeep)
+    {
+      Keep found = Get(updatedKeep.Id);
+      found.Keeps = updatedKeep.Keeps;
+      found.Views = updatedKeep.Views;
+      found.Shares = updatedKeep.Shares;
+
+      return _repo.EditKeepCounts(found);
+    }
+
     internal Keep Delete(int id, string userId)
     {
       Keep found = Get(id);
@@ -72,5 +82,7 @@ namespace Keepr.Services
     {
       return _repo.GetKeepsByVaultId(vaultId, userId);
     }
+
+
   }
 }

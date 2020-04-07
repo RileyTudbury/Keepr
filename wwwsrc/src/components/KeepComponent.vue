@@ -2,7 +2,7 @@
   <div class="col-12 col-md-3 pb-2">
     <div class="card">
       <div v-if="canKeep" class="card-header">
-        <form @submit.prevent="createVaultKeep(keepData.id)" class="form-inline" action>
+        <form @submit.prevent="createVaultKeep(keepData)" class="form-inline" action>
           <div class="form-group">
             <label>Keep it:</label>
             <select class="mx-2 form-control-sm" v-model="newVaultKeep.vaultId">
@@ -11,6 +11,13 @@
           </div>
           <button type="submit" class="btn btn-sm btn-success">+</button>
         </form>
+      </div>
+      <div v-else-if="$route.name == 'vault view'" class="card-header">
+        Remove from Vault
+        <button
+          @click="removeFromVault(keepData.vaultKeepId)"
+          class="btn btn-danger btn-sm"
+        >X</button>
       </div>
       <img :src="keepData.img" class="card-img-top" />
       <p class="card-header">{{keepData.name}}</p>
@@ -51,10 +58,14 @@ export default {
     deleteKeep(keepId) {
       this.$store.dispatch("deleteKeep", keepId);
     },
-    createVaultKeep(keepId) {
-      this.newVaultKeep.keepId = keepId;
+    createVaultKeep(keepData) {
+      this.newVaultKeep.keepId = keepData.id;
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
-      this.$store.dispatch("updateKeepCount", keepId);
+      keepData.keeps++;
+      this.$store.dispatch("updateKeepCounts", keepData);
+    },
+    removeFromVault(vaultKeepId) {
+      this.$store.dispatch("deleteVaultKeep", vaultKeepId);
     }
   }
 };

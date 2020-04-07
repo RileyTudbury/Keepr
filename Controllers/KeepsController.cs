@@ -92,8 +92,8 @@ namespace Keepr.Controllers
     }
 
     // Edit Keep Counts
-    [HttpPut("{id}")]
-    public ActionResult<Keep> Edit(int id, [FromBody] Keep updatedKeep)
+    [HttpPut("{id}/counts")]
+    public ActionResult<Keep> EditKeepCounts(int id, [FromBody] Keep updatedKeep)
     {
       try
       {

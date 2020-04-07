@@ -78,7 +78,19 @@ namespace Keepr.Repositories
       return updatedKeep;
     }
 
-
+    internal Keep EditKeepCounts(Keep updatedKeep)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+          keeps = @Keeps,
+          shares = @Shares,
+          views = @Views
+      WHERE id = @Id
+      ";
+      _db.Execute(sql, updatedKeep);
+      return updatedKeep;
+    }
 
     internal bool Delete(int Id)
     {
