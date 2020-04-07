@@ -14,7 +14,7 @@
       </div>
       <div v-else class="row">
         <div class="col-12 text-center mt-5">
-          <h3>Your Kept keeps will appear here!</h3>
+          <h3>Your Kept keeps will appear here</h3>
         </div>
       </div>
     </div>

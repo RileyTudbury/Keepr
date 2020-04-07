@@ -2,8 +2,8 @@
   <div class="home">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 text-center pt-2">
-          <h1>Welcome To Keepr</h1>
+        <div class="col-12 text-center text-light py-4">
+          <h1>Welcome To Keepr!</h1>
         </div>
       </div>
       <div v-if="this.$auth.isAuthenticated" class="row">

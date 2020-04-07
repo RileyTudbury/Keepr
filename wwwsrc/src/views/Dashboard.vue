@@ -18,7 +18,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="$route.name == 'dashboard'">
+    <div class="text-light text-center py-4" v-if="$route.name == 'dashboard'">
       <h1>WELCOME TO YOUR DASHBOARD</h1>
     </div>
     <div class="container-fluid" v-else-if="$route.name == 'Dashboard keeps'">
@@ -84,11 +84,19 @@
                           class="form-check-input"
                           id="privateCheck"
                         />Keep this private?
+                        <span
+                          v-if="!newKeep.isPrivate"
+                          class="bg-dark text-warning rounded p-1"
+                        >Warning: Public Keeps cannot be deleted!</span>
+                        <span
+                          v-else-if="newKeep.isPrivate"
+                          class="bg-dark text-success rounded p-1"
+                        >Your keep will be kept private!</span>
                       </label>
                     </div>
                     <small>Private Keeps will not be displayed on the homepage</small>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary">Keep It!</button>
                     </div>
                   </form>
@@ -151,7 +159,7 @@
                       />
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary">Vault Em!</button>
                     </div>
                   </form>
@@ -160,7 +168,7 @@
             </div>
           </div>
         </div>
-        <div class="col-3" v-for="vault in userVaults" :key="vault.id" :vaultData="vault">
+        <div class="col-3 my-1" v-for="vault in userVaults" :key="vault.id" :vaultData="vault">
           <div class="card">
             <router-link :to="{name: 'vault view', params: {vaultId: vault.id}}">
               <img
@@ -252,4 +260,7 @@ export default {
 </script>
 
 <style>
+.active {
+  color: white !important;
+}
 </style>

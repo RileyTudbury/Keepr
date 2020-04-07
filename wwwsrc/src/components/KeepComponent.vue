@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 col-md-3 pb-2">
     <div class="card">
-      <div v-if="canKeep" class="card-header">
+      <div v-if="(userVaults.length > 0) && canKeep" class="card-header">
         <form @submit.prevent="createVaultKeep(keepData)" class="form-inline" action>
           <div class="form-group">
             <label>Keep it:</label>
@@ -19,7 +19,7 @@
           class="btn btn-danger btn-sm"
         >X</button>
       </div>
-      <img :src="keepData.img" class="card-img-top" />
+      <img @click="viewKeep(keepData)" :src="keepData.img" class="card-img-top" />
       <p class="card-header">{{keepData.name}}</p>
       <div class="card-body">
         <p class="card-text">{{keepData.description}}</p>
@@ -62,6 +62,10 @@ export default {
       this.newVaultKeep.keepId = keepData.id;
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
       keepData.keeps++;
+      this.$store.dispatch("updateKeepCounts", keepData);
+    },
+    viewKeep(keepData) {
+      keepData.views++;
       this.$store.dispatch("updateKeepCounts", keepData);
     },
     removeFromVault(vaultKeepId) {
