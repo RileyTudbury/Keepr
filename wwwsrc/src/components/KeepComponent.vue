@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 col-md-3 pb-2">
     <div class="card">
-      <div class="card-header">
+      <div v-if="this.$route.name != 'vault view'" class="card-header">
         <form @submit.prevent="createVaultKeep(keepData.id)" class="form-inline" action>
           <div class="form-group">
             <label>Keep it:</label>

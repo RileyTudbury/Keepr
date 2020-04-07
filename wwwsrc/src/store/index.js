@@ -111,6 +111,11 @@ export default new Vuex.Store({
     async createVaultKeep({ commit }, vaultKeep) {
       let res = await api.post("vaultkeeps", vaultKeep)
       commit("addVaultKeep", res.data)
+    },
+
+    async getKeepsByVaultId({ commit }, vaultId) {
+      let res = await api.get(`vaults/${vaultId}/keeps`)
+      commit("setVaultKeeps", res.data)
     }
 
   }
