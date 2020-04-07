@@ -24,6 +24,9 @@ export default {
   data() {
     return {};
   },
+  beforeCreate() {
+    this.$store.dispatch("getPublicKeeps");
+  },
   components: {
     Keep
   },

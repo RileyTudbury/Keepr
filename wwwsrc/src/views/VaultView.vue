@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="col-12 text-center mt-2">
-      <h1>{{activeVault.name}}</h1>
-      <h3>{{activeVault.description}}</h3>
+      <div class="text-light my-3">
+        <h1>{{activeVault.name}}</h1>
+        <h3>{{activeVault.description}}</h3>
+      </div>
       <div v-if="vaultKeeps.length > 0" class="row">
         <keep
           v-for="(keep, key, index) in vaultKeeps"
@@ -13,8 +15,8 @@
         />
       </div>
       <div v-else class="row">
-        <div class="col-12 text-center mt-5">
-          <h3>Your Kept keeps will appear here</h3>
+        <div class="col-12 text-center text-light mt-5">
+          <h3>Your Kept keeps will appear here!</h3>
         </div>
       </div>
     </div>
