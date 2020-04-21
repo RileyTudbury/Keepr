@@ -86,9 +86,9 @@ export default new Vuex.Store({
       let res = await api.post("keeps", keepData)
       commit("addKeep", res.data)
     },
-    async deleteKeep({ commit }, keepId) {
-      let res = await api.delete(`keeps/${keepId}`)
-      commit("removeKeep", keepId)
+    async deleteKeep({ commit }, keepData) {
+      let res = await api.delete(`keeps/${keepData.id}`)
+      commit("removeKeep", keepData.id)
     },
     async updateKeepCounts({ commit, dispatch }, keepData) {
       let res = await api.put(`keeps/${keepData.id}/counts`, keepData)

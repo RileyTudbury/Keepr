@@ -27,6 +27,11 @@ export default {
   beforeCreate() {
     this.$store.dispatch("getPublicKeeps");
   },
+  mounted() {
+    if (this.$auth.isAuthenticated) {
+      this.$store.dispatch("getUserVaults");
+    }
+  },
   components: {
     Keep
   },
