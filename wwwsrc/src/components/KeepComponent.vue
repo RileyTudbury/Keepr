@@ -10,8 +10,11 @@
           v-if="$route.name == 'vault view'"
           @click="removeFromVault(keepData.vaultKeepId)"
         >Remove from Vault</button>
+        <div v-if="(keepData.userId == this.$auth.userInfo.sub) && keepData.isPrivate">
+          <button @click="deleteKeep(keepData)" class="btn btn-sm btn-danger mt-1">Delete Keep</button>
+        </div>
         <div class="bottom row pb-3">
-          <div class="col-12 mb-1">
+          <div v-if="canKeep" class="col-12 mb-1">
             <form @submit.prevent="createVaultKeep(keepData)" class="ml-4 mb-1 form-inline" action>
               <div class="form-group">
                 <label>Keep it:</label>
@@ -94,8 +97,8 @@ export default {
     }
   },
   methods: {
-    deleteKeep(keepId) {
-      this.$store.dispatch("deleteKeep", keepId);
+    deleteKeep(keepData) {
+      this.$store.dispatch("deleteKeep", keepData);
     },
     createVaultKeep(keepData) {
       this.newVaultKeep.keepId = keepData.id;
